@@ -1,6 +1,6 @@
-# SDCoNet
+# CoLR-Det
 
-# SDCoNet: Saliency-Driven Multi-Task Collaborative Network for Remote Sensing Object Detection
+# CoLR-Det: Collaborative Latent Restoration for Small Object Detection in Low-Resolution Remote Sensing Images
 
 <div align="center">
 
@@ -18,7 +18,7 @@
 
 ## 📋 Overview
 
-SDCoNet is a **Saliency-Driven multi-task Collaborative Network** designed for small object detection in low-quality remote sensing imagery. Unlike traditional serial SR-detection pipelines, SDCoNet couples super-resolution and detection through implicit feature sharing while preserving task specificity.
+CoLR-Det is a Collaborative Latent-Restoration Assisted Small Object Detection framework for remote sensing images. Different from explicit SR-before-detection pipelines, CoLR-Det does not use super-resolution as an image-level preprocessing step.
 
 ### Key Features
 
@@ -37,8 +37,8 @@ Recommended: Save as 'assets/architecture.png' or 'figures/framework.png'
 -->
 
 <div align="center">
-<img src="backbone.png" alt="SDCoNet Architecture" width="90%">
-<p><em>Figure 1: The framework pipeline of SDCoNet. Our SDCoNet comprises two core branches: super-resolution and object detection, consisting of a shared encoder, a super-resolution decoder, a saliency-driven query filtering module, and an object detection encoder-decoder.</em></p>
+<img src="backbone.png" alt="CoLR-Det Architecture" width="90%">
+<p><em>Figure 1: Given an LR image, a parameter-shared multiscale encoder extracts latent features for both detection and training-time restoration supervision. The restoration branch injects auxiliary reconstruction cues during training and is removed during inference. The detection branch predicts saliency responses and performs object-preserving token routing before DINO-style decoding. CoLR-Det is optimized with a detection-prioritized two-stage strategy, where object-level semantics are first stabilized and restoration supervision is later incorporated under a decoupled learning-rate schedule.</em></p>
 </div>
 
 ---
@@ -58,12 +58,12 @@ Recommended: Save as 'assets/architecture.png' or 'figures/framework.png'
 
 ```bash
 # Clone the repository
-git clone https://github.com/qiruo-ya/SDCoNet.git
-cd SDCoNet
+git clone https://github.com/qiruo-ya/CoLR-Det.git
+cd CoLR-Det
 
 # Create conda environment
-conda create -n sdconet python=3.8 -y
-conda activate sdconet
+conda create -n CoLR-Det python=3.8 -y
+conda activate CoLR-Det
 
 # Install PyTorch (adjust CUDA version as needed)
 pip install torch==1.12.1+cu113 torchvision==0.13.1+cu113 --extra-index-url https://download.pytorch.org/whl/cu113
@@ -79,7 +79,7 @@ pip install mmdet
 # Install other dependencies
 pip install -r requirements.txt
 
-# Install SDCoNet
+# Install CoLR-Det
 pip install -e .
 ```
 
@@ -157,7 +157,7 @@ Recommended: Save as 'assets/visualization.png'
 
 <div align="center">
 <img src="DetectionResults.png" alt="Detection Results" width="90%">
-<p><em>Figure 2: Qualitative detection results comparing SDCoNet with state-of-the-art methods.</em></p>
+<p><em>Figure 2: Qualitative detection results comparing CoLR-Det with state-of-the-art methods.</em></p>
 </div>
 
 ### Feature Map Visualization
@@ -179,8 +179,8 @@ Recommended: Save as 'assets/feature_maps.png'
 If you find this work useful in your research, please consider citing:
 
 ```bibtex
-@article{qi2026sdconet,
-  title={SDCoNet: Saliency-Driven Multi-Task Collaborative Network for Remote Sensing Object Detection},
+@article{qi2026,
+  title={CoLR-Det: Collaborative Latent Restoration for Small Object Detection in Low-Resolution Remote Sensing Images},
   author={Qi, Ruo and Dai, Linhui and Qin, Yusong and Yang, Chaolei and Li, Yanshan},
   year={2026},
 }
